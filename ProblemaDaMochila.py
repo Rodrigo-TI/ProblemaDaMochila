@@ -1,3 +1,6 @@
+# OBS : A ideia sobre como usar a biblioteca DEAP para o problema da mochila veio do site da documentação
+#       da própria biblioteca. Link : https://deap.readthedocs.io/en/master/examples/ga_knapsack.html?highlight=Knapsack%20
+
 import random
 from deap import creator, base, tools, algorithms
 # individuo
@@ -28,12 +31,13 @@ def avaliacao(individual):
     if pesoTotal > capMaxMochila:
         return -1
     return pesoTotal, valorTotal
-# crossover
+# crossover (a criação é necessária pois a biblioteca não tem um crossover para matriz)
 def crossover(individual1, individual2):
     temp = set(individual1)
     individual1 &= individual2
     individual2 ^= temp
     return individual1, individual2
+# mutacao (a criação é necessária pois a biblioteca não tem uma mutacao para matriz)
 def mutacao(individual):
     if random.random() < 0.5:
         if len(individual) > 0:
